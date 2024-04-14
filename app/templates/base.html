@@ -10,13 +10,11 @@
 
     {{ font_awesome.load_css() }}
 
-    <link rel='stylesheet' href="{{ url_for('static', filename='styles/vars.css')}}">
-    <link rel='stylesheet' href="{{ url_for('static', filename='styles/header.css')}}">
-    <link rel='stylesheet' href="{{ url_for('static', filename='styles/footer.css')}}">
-
     {% assets "scss_all" %}
     <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
     {% endassets %}
+
+    <!-- <link rel='stylesheet' href="{{ url_for('static', filename='styles/vars.css')}}"> -->
 
     <!-- <%= csrf_meta_tags %>
         <%= csp_meta_tag %>
@@ -26,7 +24,6 @@
 </head>
 
 <body>
-    {% include 'header.html' %}
     {% include 'nav.html' %}
     {% block content %}{% endblock %}
     {% include 'footer.html' %}

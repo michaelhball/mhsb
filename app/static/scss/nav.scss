@@ -1,11 +1,13 @@
+@import 'vars';
+
 nav {
-    height: var(--header_height);
-    margin-left: var(--body_padding);
-    margin-right: var(--body_padding);
-    margin-top: -var(--body_padding);
+    height: $header_height;
+    margin-left: -$body_padding;
+    margin-right: -$body_padding;
+    margin-top: -$body_padding;
     position: relative;
     top: 0px;
-    width: calc(2 * var(--body_padding) + 100%);
+    width: calc(2 * $body_padding + 100%);
 }
 
 nav .dropdown {
@@ -67,7 +69,7 @@ nav .trigger {
 
 nav .trigger .menu-icon {
     --height: .25rem;
-    background-color: var(--purple);
+    background-color: $purple;
     height: var(--height);
     width: 100%;
     pointer-events: none;
@@ -76,7 +78,7 @@ nav .trigger .menu-icon {
 
     &:before,
     &:after {
-        background-color: var(--purple);
+        background-color: $purple;
         height: var(--height);
         width: 100%;
         transition: all ease-in-out 0.25s;
@@ -97,7 +99,7 @@ nav .trigger .menu-icon {
 }
 
 nav .nav-list {
-    background: var(--background);
+    background: $background;
     box-shadow: none;
     transition: box-shadow 1s ease-in-out;
     display: flex;

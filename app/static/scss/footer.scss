@@ -1,6 +1,8 @@
+@import 'vars';
+
 footer {
     bottom: 0;
-    height: var(--footer_height);
+    height: $footer_height;
     margin: auto;
     position: absolute;
     width: 100%;
@@ -15,8 +17,8 @@ footer .footer-container {
 }
 
 footer .footer-container .footer-link-wrapper {
-    height: var(--footer_height);
-    line-height: var(--footer_height);
+    height: $footer_height;
+    line-height: $footer_height;
     position: relative;
 }
 

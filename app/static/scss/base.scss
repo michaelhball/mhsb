@@ -1,3 +1,5 @@
+@import 'vars';
+
 @font-face {
     font-family: "RalewayRegular";
     src: url("/static/fonts/Raleway-Regular.ttf");
@@ -13,12 +15,20 @@
     src: url("/fonts/Raleway-SemiBold.ttf");
 }
 
-:root {
-    --background: #f9f9f9;
-    --purple: #686de0;
+html {
+    background-color: $background;
+}
 
-    --header_height: 80px;
-    --footer_height: 100px;
+body {
+    margin: 0px;
+    overflow-x: hidden;
+    padding: 0px;
+    position: relative;
+    width: 100%;
+}
 
-    --body_padding: 8px;
+body::after {
+    content: '';
+    display: block;
+    height: $footer_height;
 }
