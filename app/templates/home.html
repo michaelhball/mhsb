@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<link rel='stylesheet' href="{{ url_for('static', filename='styles/home.css')}}">
+<section class='home-section'>
+    <div class='container'>
+        <h1 class='name'>Michael Ball</h1>
+        <div class='subtitle-1'><span>machine learning engineer</span></div>
+        <a href="'/cv'" target="_blank" class="cv-button">
+            <p>CV</p>
+        </a>
+    </div>
+</section>
+
+{% endblock %}
