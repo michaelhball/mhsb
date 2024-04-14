@@ -1,0 +1,49 @@
+footer {
+    bottom: 0;
+    height: var(--footer_height);
+    margin: auto;
+    position: absolute;
+    width: 100%;
+}
+
+footer .footer-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+footer .footer-container .footer-link-wrapper {
+    height: var(--footer_height);
+    line-height: var(--footer_height);
+    position: relative;
+}
+
+footer .footer-container .footer-link {
+    margin-left: 5px;
+    margin-right: 5px;
+    position: relative;
+}
+
+footer .footer-container .footer-link i {
+    font-size: 24px;
+}
+
+footer a {
+    color: #21211f;
+    padding: 0 0.5rem;
+    transition: all 0.5s ease;
+}
+
+footer a:hover {
+    transition: all 0.5s ease;
+}
+
+footer a#footerLinkedIn:hover {
+    color: #1a85bc;
+}
+
+footer a#footerSoundcloud:hover {
+    color: #ff7700;
+}
