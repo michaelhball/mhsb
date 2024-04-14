@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>mhsb</title>
+
+    {{ font_awesome.load_css() }}
+
+    <style>
+        @font-face {
+            font-family: "RalewayRegular";
+            src: url("{{url_for('static', filename='fonts/Raleway-Regular.ttf')}}");
+        }
+
+        @font-face {
+            font-family: "RalewayBold";
+            src: url("{{url_for('static', filename='fonts/Raleway-Bold.ttf')}}");
+        }
+
+        @font-face {
+            font-family: "RalewaySemiBold";
+            src: url("{{url_for('static', filename='fonts/Raleway-SemiBold.ttf')}}");
+        }
+    </style>
+
+    <link rel='stylesheet' href="{{ url_for('static', filename='styles/vars.css')}}">
+    <link rel='stylesheet' href="{{ url_for('static', filename='styles/header.css')}}">
+    <link rel='stylesheet' href="{{ url_for('static', filename='styles/footer.css')}}">
+    <link rel='stylesheet' href="{{ url_for('static', filename='styles/nav.css')}}">
+
+    <!-- <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+
+            <%= stylesheet_link_tag 'application' , media: 'all' , 'data-turbolinks-track' : 'reload' %>
+                <%= javascript_pack_tag 'application' , 'data-turbolinks-track' : 'reload' %> -->
+</head>
+
+<body>
+    {% include 'header.html' %}
+    {% include 'nav.html' %}
+    {% block content %}{% endblock %}
+    {% include 'footer.html' %}
+</body>
+
+</html>
