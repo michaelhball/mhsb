@@ -1,3 +1,18 @@
+@font-face {
+    font-family: "RalewayRegular";
+    src: url("/static/fonts/Raleway-Regular.ttf");
+}
+
+@font-face {
+    font-family: "RalewayBold";
+    src: url("/static/fonts/Raleway-Bold.ttf");
+}
+
+@font-face {
+    font-family: "RalewaySemiBold";
+    src: url("/fonts/Raleway-SemiBold.ttf");
+}
+
 :root {
     --background: #f9f9f9;
     --purple: #686de0;
