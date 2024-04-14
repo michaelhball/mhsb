@@ -1,0 +1,43 @@
+[tool.poetry]
+name = "mhsb"
+version = "0.0.1"
+description = "yo"
+license = "MIT"
+authors = ["mhsb <michael.h.s.ball@gmail.com>"]
+homepage = 'https://github.com/michaelhball/mhsb2'
+repository = 'https://github.com/michaelhball/mhsb2'
+keywords = ['Me', 'mhsb', 'CV']
+include = ["LICENSE"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+flask = "^3.03"
+Font-Awesome-Flask = "^0.1.4"
+pre-commit = "^3.7.0"
+python-dotenv = "^1.0.1"
+ruff = "^0.3.7"
+
+[tool.poetry.dev-dependencies]
+pytest = "^8.1.1"
+pytest-sugar = "^1.0.0"
+
+[build-system]
+requires = ["poetry-core>=1.8.2"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+select = ["E", "F", "I", "TID", "W"]
+exclude = [".git", ".ruff_cache", "dist", "docker", "img"]
+fix = false
+ignore-init-module-imports = true
+line-length = 120
+target-version = "py38"  # assume Python 3.8 style
+
+[tool.ruff.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.isort]
+combine-as-imports = true
+force-single-line = false
+order-by-type = false
