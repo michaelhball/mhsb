@@ -3,3 +3,5 @@ TODO.txt
 .flaskenv
 .DS_Store
 __pycache__
+.webassets-cache
+compiled.css

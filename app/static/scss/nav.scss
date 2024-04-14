@@ -1,0 +1,192 @@
+nav {
+    height: var(--header_height);
+    margin-left: var(--body_padding);
+    margin-right: var(--body_padding);
+    margin-top: -var(--body_padding);
+    position: relative;
+    top: 0px;
+    width: calc(2 * var(--body_padding) + 100%);
+}
+
+nav .dropdown {
+    float: right;
+    margin-right: 16px;
+    position: relative;
+    z-index: 100;
+
+    &:hover,
+    &:active,
+    &:focus {
+
+        .menu-icon {
+            height: 0;
+
+            &:before {
+                transform: translateY(-50%) rotate(45deg);
+                top: 50%;
+            }
+
+            &:after {
+                transform: translateY(50%) rotate(-45deg);
+                bottom: 50%;
+            }
+        }
+
+        .nav-list {
+            padding-bottom: 8px;
+            box-shadow: rgba(104, 109, 224, 0.3) -5px 5px, rgba(104, 109, 224, 0.2) -10px 10px, rgba(104, 109, 224, 0.1) -15px 15px, rgba(104, 109, 224, 0.05) -20px 20px;
+
+            .nav-item {
+                display: block;
+                transition-delay: 0.25s;
+            }
+        }
+    }
+}
+
+nav .trigger {
+    cursor: pointer;
+    float: right;
+    margin-top: 8px;
+    position: relative;
+
+    appearance: none;
+    background: none;
+    border: none;
+    align-items: center;
+    align-self: center;
+    display: flex;
+    height: 3rem;
+    padding: .5rem;
+    width: 2.5rem;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+nav .trigger .menu-icon {
+    --height: .25rem;
+    background-color: var(--purple);
+    height: var(--height);
+    width: 100%;
+    pointer-events: none;
+    transition: all ease-in-out 0.25s;
+    z-index: 100;
+
+    &:before,
+    &:after {
+        background-color: var(--purple);
+        height: var(--height);
+        width: 100%;
+        transition: all ease-in-out 0.25s;
+        content: '';
+        position: absolute;
+        left: .5rem;
+        right: .5rem;
+        width: auto;
+    }
+
+    &:before {
+        top: 0.9rem;
+    }
+
+    &:after {
+        bottom: 0.9rem;
+    }
+}
+
+nav .nav-list {
+    background: var(--background);
+    box-shadow: none;
+    transition: box-shadow 1s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 56px;
+    width: 120px;
+
+    &:hover,
+    &:active,
+    &:focus {
+        padding-bottom: 8px;
+
+        .nav-item {
+            display: block;
+            transition-delay: 0.25s;
+        }
+    }
+}
+
+nav .nav-list .nav-item {
+    display: none;
+    opacity: 0;
+    transition: display 0.25s ease-in-out;
+
+    margin: 0;
+    padding: 0;
+    padding-bottom: 4px;
+    padding-top: 4px;
+
+    &:hover {
+        background-color: #EAEAEA;
+    }
+}
+
+nav .nav-list .nav-item a p {
+    margin: 0;
+    padding-right: 36px;
+}
+
+nav .nav-list .nav-item.disabled {
+    pointer-events: none;
+
+    a {
+        color: #777777 !important;
+    }
+}
+
+@for $counter from 1 through 7 {
+    .nav-item-#{$counter} {
+        transform-origin: top center;
+        animation: doot 280ms ($counter * 40ms) ease-in-out forwards;
+    }
+}
+
+.nav-list::after {
+    transform-origin: top center;
+    animation: doot 20ms (20ms) ease-in-out forwards;
+}
+
+@keyframes doot {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    80% {
+        //   transform: translateX(-5px);
+        transform: scale(1.07);
+    }
+
+    100% {
+        opacity: 1;
+        //   transform: translateX(0px);
+        transform: scale(1);
+    }
+}
+
+nav .nav-list .nav-link {
+    color: black;
+    display: block;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
