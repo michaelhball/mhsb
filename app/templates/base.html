@@ -14,6 +14,10 @@
     <link rel='stylesheet' href="{{ url_for('static', filename='styles/header.css')}}">
     <link rel='stylesheet' href="{{ url_for('static', filename='styles/footer.css')}}">
 
+    {% assets "scss_all" %}
+    <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+
     <!-- <%= csrf_meta_tags %>
         <%= csp_meta_tag %>
 
