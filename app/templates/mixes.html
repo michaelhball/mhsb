@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class='music-section'>
+    <h1 class='page-title'>Music</h1>
+    <p class='intro-text'>For my listening pleasure.</p>
+    <div class='page-line'></div>
+    <div class='music-list-container'>
+        <ul class='music-list'>
+            <li class='music-list-item'>
+
+                {% for mix in mixes %}
+                <div class='mix' role='mix'>
+
+                    <div class='lhs'>
+                        <a href="{{ mix.url }}" class="link" target="_blank">
+                            <img src="{{ mix.image_url }}" />
+                        </a>
+                    </div>
+
+                    <div class='rhs'>
+                        <h3>{{ mix.name }}</h3>
+                        <div class='date'>{{ mix.date }}</div>
+                        <iframe scrolling="no" frameborder="no" src="{{ mix.url }}"></iframe>
+                        <div class='tags'>
+                            {% for tag in mix.tags %}
+                            <div class='tag'>#{{ tag }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+
+            </li>
+        </ul>
+    </div>
+</section>
+
+{% endblock %}

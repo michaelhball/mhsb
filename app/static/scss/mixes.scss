@@ -1,0 +1,95 @@
+.music-section {
+    height: calc(100vh - 100px - 80px + 8px);
+}
+
+.music-list-container {
+    margin-top: 10px;
+    margin-left: 10%;
+    width: 80%;
+    max-height: 88%;
+    overflow-y: auto;
+
+    // hide scrollbar (incl. the webkit below)
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.music-list-container::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
+}
+
+.music-list {
+    list-style-type: none;
+    margin-top: 0px;
+    max-height: inherit;
+}
+
+.mix {
+    display: flex;
+    margin-top: 10px;
+    padding: 10px;
+    position: relative;
+}
+
+.mix .lhs {
+    max-height: 215px;
+    position: relative;
+    width: 30%;
+}
+
+.mix .lhs .link {
+    position: relative;
+}
+
+.mix .lhs .link img {
+    height: 100%;
+    margin-left: 50%;
+    max-width: 100%;
+    position: relative;
+    transform: translateX(-50%);
+}
+
+.mix .rhs {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 70%;
+    font-family: Constantia, "Lucida Bright", "Lucidabright", "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+}
+
+.mix .rhs h3 {
+    margin: 0;
+    margin-top: 15px;
+    position: relative;
+}
+
+.mix .rhs .date {
+    font-size: 16px;
+    margin-left: auto;
+    margin-top: -21px;
+    // margin-top: 15px;
+    // margin-right: 30px;
+    // right: 15px;
+    position: relative;
+}
+
+.mix .rhs iframe {
+    height: 60px;
+    height: 120px;
+    margin-top: 20px;
+    max-width: 700px;
+    width: 100%;
+}
+
+.mix .tags {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.mix .tags .tag {
+    margin-right: 10px;
+}
