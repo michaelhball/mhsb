@@ -18,7 +18,7 @@ MIXES = [
             "color": "80902c",
             "name": "afternoon underexertion",
             "date": "Jun. 19 2023",
-            "image_url": "/static/images/afternoon_under_exertion.png",
+            "image_url": "/static/images/afternoon_under_exertion.jpeg",
             "tags": ["autumn", "relax", "house"],
         },
         {
