@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, url_for
+from flask import Flask, redirect, render_template, request, send_file, send_from_directory, url_for
 
 from app import app
 from app.mixes import MIXES
@@ -39,3 +39,13 @@ def mixes():
 @app.route("/movies", methods=["GET"])
 def movies():
     return render_template("movies.html")
+
+
+@app.get("/cv")
+def cv():
+    return send_from_directory(app.static_folder, "documents/michael_ball_CV.pdf")
+
+
+@app.get("/thesis")
+def thesis():
+    return send_from_directory(app.static_folder, "documents/michael_ball_thesis.pdf")
