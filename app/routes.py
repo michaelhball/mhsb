@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import redirect, render_template, request, url_for
 
 from app import app
 from app.mixes import MIXES
@@ -9,9 +9,31 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/mixes", methods=["GET"])
+@app.route("/remove_tag", methods=["GET"])
+def remove_tag():
+    tag = request.args.get("tag")
+    tags = request.args.get("tags").split(",")
+    tags = [t for t in tags if t != tag]
+    kwargs = {} if len(tags) == 0 else {"tags": ",".join(tags)}
+    return redirect(url_for("mixes", **kwargs))
+
+
+@app.route("/add_tag", methods=["GET"])
+def add_tag():
+    tag = request.args.get("tag")
+    tags = [] if "tags" not in request.args else request.args.get("tags").split(",")
+    tags = [t for t in tags if t != ""]
+    if tag not in tags:
+        tags.append(tag)
+    return redirect(url_for("mixes", tags=",".join(tags)))
+
+
+@app.route("/mixes", methods=["GET", "POST"])
 def mixes():
-    return render_template("mixes.html", mixes=MIXES)
+    tags = [] if "tags" not in request.args else request.args.get("tags").split(",")
+    tags = [t for t in tags if t != ""]
+    mixes = [m for m in MIXES if all(tag in m["tags"] for tag in tags)]
+    return render_template("mixes.html", mixes=mixes, tags=tags, no_more_tags=len(tags) == 2)
 
 
 @app.route("/movies", methods=["GET"])

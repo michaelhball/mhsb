@@ -3,9 +3,18 @@
 {% block content %}
 
 <section class='music-section'>
+
     <h1 class='page-title'>Music</h1>
     <p class='intro-text'>For my listening pleasure.</p>
+    {% if tags %}
+    <div class='selected-tags'>
+        {% for tag in tags %}
+        <a href="{{ url_for('remove_tag', tag=tag, tags=','.join(tags)) }}" class='tag'>#{{ tag }}</a>
+        {% endfor %}
+    </div>
+    {% endif %}
     <div class='page-line'></div>
+
     <div class='music-list-container'>
         <ul class='music-list'>
             <li class='music-list-item'>
@@ -23,11 +32,17 @@
                         <h3>{{ mix.name }}</h3>
                         <div class='date'>{{ mix.date }}</div>
                         <iframe scrolling="no" frameborder="no" src="{{ mix.url }}"></iframe>
+
                         <div class='tags'>
                             {% for tag in mix.tags %}
-                            <div class='tag'>#{{ tag }}</div>
+                            <a href="{{ url_for('add_tag', tag=tag, tags=','.join(tags)) }}"
+                                class="{{'tag disabled' if no_more_tags or tag in tags else 'tag'}}"
+                                style="color:#{{mix.color}}">
+                                #{{ tag}}
+                            </a>
                             {% endfor %}
                         </div>
+
                     </div>
 
                 </div>
