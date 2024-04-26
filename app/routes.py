@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, send_file, send_from_directory, url_for
+from flask import redirect, render_template, request, send_from_directory, url_for
 
 from app import app
 from app.mixes import MIXES
