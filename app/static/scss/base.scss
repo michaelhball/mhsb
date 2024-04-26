@@ -32,3 +32,24 @@ body::after {
     display: block;
     height: $footer_height;
 }
+
+h1.page-title {
+    font-family: RalewayBold;
+    font-size: 48px;
+    margin: 0;
+    margin-left: 5%;
+    padding-top: 0;
+}
+
+p.intro-text {
+    font-style: italic;
+    margin-left: 10%;
+    width: 80%;
+}
+
+.page-line {
+    box-shadow: 0 -5px 0 0 $background inset, 0 -6px 0 0 black inset;
+    height: 6px;
+    margin-left: 5%;
+    width: 90%;
+}
