@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, send_from_directory, url_for
 
 from app import app
-from app.mixes import MIXES
+from app.music import MIXES
 
 
 @app.route("/", methods=["GET"])
@@ -15,7 +15,7 @@ def remove_tag():
     tags = request.args.get("tags").split(",")
     tags = [t for t in tags if t != tag]
     kwargs = {} if len(tags) == 0 else {"tags": ",".join(tags)}
-    return redirect(url_for("mixes", **kwargs))
+    return redirect(url_for("music", **kwargs))
 
 
 @app.route("/add_tag", methods=["GET"])
@@ -25,15 +25,15 @@ def add_tag():
     tags = [t for t in tags if t != ""]
     if tag not in tags:
         tags.append(tag)
-    return redirect(url_for("mixes", tags=",".join(tags)))
+    return redirect(url_for("music", tags=",".join(tags)))
 
 
-@app.route("/mixes", methods=["GET", "POST"])
-def mixes():
+@app.route("/music", methods=["GET", "POST"])
+def music():
     tags = [] if "tags" not in request.args else request.args.get("tags").split(",")
     tags = [t for t in tags if t != ""]
     mixes = [m for m in MIXES if all(tag in m["tags"] for tag in tags)]
-    return render_template("mixes.html", mixes=mixes, tags=tags, no_more_tags=len(tags) == 2)
+    return render_template("music.html", mixes=mixes, tags=tags, no_more_tags=len(tags) == 2)
 
 
 @app.route("/movies", methods=["GET"])
