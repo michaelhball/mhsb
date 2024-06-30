@@ -5,3 +5,4 @@ TODO.txt
 __pycache__
 .webassets-cache
 compiled.css
+dist
