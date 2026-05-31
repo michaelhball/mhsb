@@ -36,11 +36,6 @@ def music():
     return render_template("music.html", mixes=mixes, tags=tags, no_more_tags=len(tags) == 2)
 
 
-@app.route("/movies", methods=["GET"])
-def movies():
-    return render_template("movies.html")
-
-
 @app.get("/cv")
 def cv():
     return send_from_directory(app.static_folder, "documents/michael_ball_CV.pdf")
