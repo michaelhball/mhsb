@@ -1,8 +1,23 @@
+# Local / editor
+.DS_Store
 TODO.txt
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.ruff_cache/
+.pytest_cache/
+
+# Environment
 .env
 .flaskenv
-.DS_Store
-__pycache__
-.webassets-cache
-compiled.css
-dist
+
+# Build artifacts
+dist/
+build/
+node_modules/
+
+# Generated assets (compiled from app/static/scss/ at build time)
+.webassets-cache/
+app/static/styles/compiled.css
