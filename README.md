@@ -12,7 +12,7 @@ Deployed on Google Cloud Run.
 
 ```bash
 uv sync                 # create .venv and install dependencies (Python 3.13)
-./scripts/build_css.sh  # compile SCSS -> app/static/styles/compiled.css (needs Dart Sass)
+./scripts/build_css.sh  # compile SCSS -> app/static/styles/compiled.css (uses Dart Sass, or npx)
 uv run flask --app mhsb run --debug
 ```
 

@@ -13,14 +13,16 @@ Google Cloud Run.
 | [`gcloud`](https://cloud.google.com/sdk/docs/install) | deploy (only if deploying) | per-OS installer |
 
 uv installs the correct Python (3.13, pinned in `.python-version`) for you — no
-system Python required.
+system Python required. `scripts/build_css.sh` uses the `sass` binary if it's
+installed and otherwise falls back to `npx sass`, so **either Dart Sass or
+Node** is enough to build the CSS.
 
 ## 2. Clone & install
 
 ```bash
-git clone git@github.com:michaelhball/mhsb.git
+git clone git@github.com:michaelhball/mhsb.git    # or: https://github.com/michaelhball/mhsb.git
 cd mhsb
-uv sync            # creates .venv and installs everything from uv.lock
+uv sync            # creates .venv and installs everything from uv.lock (incl. Python 3.13)
 ```
 
 ## 3. Environment & config
