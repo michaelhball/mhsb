@@ -58,5 +58,6 @@ uv run ruff check . && uv run ruff format  # lint + format
   environment / Secret Manager (the app warns otherwise).
 - The GitHub repo is `michaelhball/mhsb`; the local working directory is
   `mhsb2`. Same project.
-- Deployed on **Google Cloud Run** via the `Dockerfile` (gunicorn `mhsb:app`,
-  bound to `0.0.0.0:$PORT`). Deploys are manual.
+- **Targets Google Cloud Run** via the `Dockerfile` (gunicorn `mhsb:app`, bound
+  to `0.0.0.0:$PORT`); deploys are manual. The live site is still on
+  PythonAnywhere until the cutover — see [DEVELOPMENT.md](DEVELOPMENT.md) §8.
