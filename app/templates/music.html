@@ -9,7 +9,7 @@
     {% if tags %}
     <div class='selected-tags'>
         {% for tag in tags %}
-        <a href="{{ url_for('remove_tag', tag=tag, tags=','.join(tags)) }}" class='tag'>#{{ tag }}</a>
+        <a href="{{ url_for('main.remove_tag', tag=tag, tags=','.join(tags)) }}" class='tag'>#{{ tag }}</a>
         {% endfor %}
     </div>
     {% endif %}
@@ -35,7 +35,7 @@
 
                         <div class='tags'>
                             {% for tag in mix.tags %}
-                            <a href="{{ url_for('add_tag', tag=tag, tags=','.join(tags)) }}"
+                            <a href="{{ url_for('main.add_tag', tag=tag, tags=','.join(tags)) }}"
                                 class="{{'tag disabled' if no_more_tags or tag in tags else 'tag'}}"
                                 style="color:#{{mix.color}}">
                                 #{{ tag}}

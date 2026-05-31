@@ -1,46 +1,51 @@
-from flask import redirect, render_template, request, send_from_directory, url_for
+from flask import Blueprint, current_app, redirect, render_template, request, send_from_directory, url_for
+from flask.typing import ResponseReturnValue
 
-from app import app
 from app.music import MIXES
 
+bp = Blueprint("main", __name__)
 
-@app.route("/", methods=["GET"])
-def home():
+MAX_TAGS = 2
+
+
+def _parse_tags(raw: str | None) -> list[str]:
+    return [tag for tag in (raw or "").split(",") if tag]
+
+
+@bp.get("/")
+def home() -> str:
     return render_template("home.html")
 
 
-@app.route("/remove_tag", methods=["GET"])
-def remove_tag():
-    tag = request.args.get("tag")
-    tags = request.args.get("tags").split(",")
-    tags = [t for t in tags if t != tag]
-    kwargs = {} if len(tags) == 0 else {"tags": ",".join(tags)}
-    return redirect(url_for("music", **kwargs))
+@bp.get("/music")
+def music() -> str:
+    tags = _parse_tags(request.args.get("tags"))
+    mixes = [mix for mix in MIXES if all(tag in mix["tags"] for tag in tags)]
+    return render_template("music.html", mixes=mixes, tags=tags, no_more_tags=len(tags) >= MAX_TAGS)
 
 
-@app.route("/add_tag", methods=["GET"])
-def add_tag():
-    tag = request.args.get("tag")
-    tags = [] if "tags" not in request.args else request.args.get("tags").split(",")
-    tags = [t for t in tags if t != ""]
-    if tag not in tags:
+@bp.get("/add_tag")
+def add_tag() -> ResponseReturnValue:
+    tag = request.args.get("tag", "")
+    tags = _parse_tags(request.args.get("tags"))
+    if tag and tag not in tags:
         tags.append(tag)
-    return redirect(url_for("music", tags=",".join(tags)))
+    return redirect(url_for("main.music", tags=",".join(tags)))
 
 
-@app.route("/music", methods=["GET", "POST"])
-def music():
-    tags = [] if "tags" not in request.args else request.args.get("tags").split(",")
-    tags = [t for t in tags if t != ""]
-    mixes = [m for m in MIXES if all(tag in m["tags"] for tag in tags)]
-    return render_template("music.html", mixes=mixes, tags=tags, no_more_tags=len(tags) == 2)
+@bp.get("/remove_tag")
+def remove_tag() -> ResponseReturnValue:
+    tag = request.args.get("tag", "")
+    tags = [t for t in _parse_tags(request.args.get("tags")) if t != tag]
+    kwargs = {"tags": ",".join(tags)} if tags else {}
+    return redirect(url_for("main.music", **kwargs))
 
 
-@app.get("/cv")
-def cv():
-    return send_from_directory(app.static_folder, "documents/michael_ball_CV.pdf")
+@bp.get("/cv")
+def cv() -> ResponseReturnValue:
+    return send_from_directory(current_app.static_folder, "documents/michael_ball_CV.pdf")
 
 
-@app.get("/thesis")
-def thesis():
-    return send_from_directory(app.static_folder, "documents/michael_ball_thesis.pdf")
+@bp.get("/thesis")
+def thesis() -> ResponseReturnValue:
+    return send_from_directory(current_app.static_folder, "documents/michael_ball_thesis.pdf")
