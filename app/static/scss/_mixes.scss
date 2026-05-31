@@ -1,4 +1,4 @@
-@import 'vars';
+@use 'vars' as *;
 
 .music-section {
     height: calc(100vh - 100px - 80px + 8px);

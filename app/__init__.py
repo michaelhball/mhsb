@@ -1,8 +1,6 @@
 """Application factory for the mhsb personal website (mhsb.me)."""
 
 from flask import Flask, render_template, Response
-from flask_assets import Bundle, Environment
-from flask_font_awesome import FontAwesome
 
 from app.config import Config, DEV_SECRET_KEY
 
@@ -14,22 +12,12 @@ def create_app(config: type[Config] = Config) -> Flask:
     if not app.debug and app.config["SECRET_KEY"] == DEV_SECRET_KEY:
         app.logger.warning("SECRET_KEY is the insecure development default; set SECRET_KEY in the environment.")
 
-    _init_assets(app)
-    FontAwesome(app)
-
     from app.routes import bp
 
     app.register_blueprint(bp)
     _register_error_handlers(app)
     _register_security_headers(app)
     return app
-
-
-def _init_assets(app: Flask) -> None:
-    assets = Environment(app)
-    scss_bundle = Bundle("scss/*.scss", output="styles/compiled.css", filters=["libsass"])
-    assets.register("scss_all", scss_bundle)
-    scss_bundle.build()
 
 
 def _register_error_handlers(app: Flask) -> None:

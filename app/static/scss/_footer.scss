@@ -1,4 +1,4 @@
-@import 'vars';
+@use 'vars' as *;
 
 footer {
     bottom: 0;
@@ -28,8 +28,11 @@ footer .footer-container .footer-link {
     position: relative;
 }
 
-footer .footer-container .footer-link i {
-    font-size: 24px;
+footer .footer-container .footer-link svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    vertical-align: middle;
 }
 
 footer a {
