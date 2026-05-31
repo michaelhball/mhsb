@@ -4,7 +4,7 @@
 FROM node:22-slim AS assets
 WORKDIR /build
 COPY app/static/scss ./scss
-RUN npx --yes sass@1 scss/main.scss compiled.css --no-source-map --style=compressed
+RUN npx --yes sass@1.100.0 scss/main.scss compiled.css --no-source-map --style=compressed
 
 # --- Stage 2: runtime ---------------------------------------------------------
 FROM python:3.13-slim AS runtime

@@ -33,4 +33,4 @@ jobs:
           node-version: 22
 
       - name: Build CSS (Dart Sass compiles cleanly)
-        run: npx --yes sass@1 app/static/scss/main.scss /tmp/compiled.css --no-source-map --style=compressed
+        run: npx --yes sass@1.100.0 app/static/scss/main.scss /tmp/compiled.css --no-source-map --style=compressed

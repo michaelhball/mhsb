@@ -60,8 +60,9 @@ uv run flask --app mhsb run --debug            # http://127.0.0.1:5000
 
 ## 5. How styling works
 
-- SCSS lives in `app/static/scss/` as Dart Sass `@use` modules — `_vars`,
-  `_base`, `_nav`, `_footer`, `_mixes` — with **`main.scss`** as the entry.
+- SCSS lives in `app/static/scss/`. **`main.scss`** is the entry point; it
+  `@use`s `_base`, `_footer`, `_mixes`, `_nav`, which in turn pull in `_vars`
+  (`@use 'vars' as *`).
 - Dart Sass compiles `main.scss` → `app/static/styles/compiled.css`, which
   `base.html` links directly. `compiled.css` is generated and **gitignored**.
 - `app/static/styles/home.css` is a separate, hand-written stylesheet linked
@@ -78,8 +79,9 @@ uv run flask --app mhsb run --debug            # http://127.0.0.1:5000
     artwork with macOS Digital Colour Meter).
   - `image_url` — add the artwork to `app/static/images/` and point to it.
   - `tags` — a few lowercase tags (the music page filters by up to two).
-- The **projects / movies / blog** nav items are intentionally disabled
-  ("coming soon"); there are no routes behind them.
+- The **projects / movies / blog** nav items are intentionally disabled —
+  greyed out and non-clickable via the `disabled` class; there are no routes
+  behind them.
 
 ## 7. Quality checks
 
