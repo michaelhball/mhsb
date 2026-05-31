@@ -1,0 +1,22 @@
+# Files NOT uploaded to Cloud Build by `gcloud run deploy --source` /
+# `gcloud builds submit`. Everything the Dockerfile needs (Dockerfile,
+# pyproject.toml, uv.lock, app/ incl. static/scss, templates, mhsb.py) is kept.
+.git
+.gitignore
+.github
+.venv
+**/__pycache__
+*.pyc
+.ruff_cache
+.pytest_cache
+.webassets-cache
+.DS_Store
+**/.DS_Store
+.env
+.flaskenv
+TODO.txt
+tests
+dist
+build
+node_modules
+app/static/styles/compiled.css
