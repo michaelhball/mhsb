@@ -34,3 +34,37 @@ jobs:
 
       - name: Build CSS (Dart Sass compiles cleanly)
         run: npx --yes sass@1.100.0 app/static/scss/main.scss /tmp/compiled.css --no-source-map --style=compressed
+
+  deploy:
+    # Auto-deploy only real pushes to main (never PRs), and only after `check` passes.
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'    # checkout
+      id-token: 'write'   # mint the GitHub OIDC token for keyless WIF auth
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud (Workload Identity Federation)
+        uses: google-github-actions/auth@v3
+        with:
+          project_id: mhsb-prod
+          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+          service_account: ${{ vars.DEPLOY_SA }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v3
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy mhsb \
+            --source=. \
+            --project=mhsb-prod \
+            --region=europe-west1 \
+            --allow-unauthenticated \
+            --port=8080 \
+            --cpu=1 --memory=512Mi \
+            --min-instances=0 --max-instances=2 \
+            --set-secrets=SECRET_KEY=flask-secret-key:latest \
+            --quiet
