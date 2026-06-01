@@ -6,7 +6,8 @@ A small, server-rendered [Flask](https://flask.palletsprojects.com/) app: no
 database, no JavaScript framework. Pages are Jinja templates; styling is SCSS
 compiled to CSS with [Dart Sass](https://sass-lang.com/dart-sass/); the Python
 environment and dependencies are managed with [uv](https://docs.astral.sh/uv/).
-Containerised for deployment on Google Cloud Run (see [DEVELOPMENT.md](DEVELOPMENT.md)).
+Containerised and deployed on Google Cloud Run; pushes to `main` auto-deploy via
+GitHub Actions (see [DEVELOPMENT.md](DEVELOPMENT.md)).
 
 ## Quick start
 

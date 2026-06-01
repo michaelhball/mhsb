@@ -32,6 +32,9 @@ uv run ruff check . && uv run ruff format  # lint + format
 | `app/config.py` | config; `SECRET_KEY` from env |
 | `app/static/scss/` | `@use` modules + `main.scss` entry |
 | `Dockerfile` | Cloud Run image (Dart Sass build + gunicorn) |
+| `scripts/deploy.sh` | manual Cloud Run deploy (`gcloud run deploy --source=.`, upsert) |
+| `scripts/setup_cicd.sh` | one-time WIF identity setup for CI auto-deploy |
+| `.github/workflows/ci.yml` | CI (`check`) + auto-deploy (`deploy`, on push to `main`) |
 
 ## Conventions
 
@@ -51,13 +54,16 @@ uv run ruff check . && uv run ruff format  # lint + format
   recreate it (see DEVELOPMENT.md).
 - Footer icons are **inline SVGs** (Font Awesome Free); there is no Font Awesome
   dependency. `app/static/styles/home.css` is a separate hand-written file; its
-  `.cv-button::before` references a `FontAwesome` web font that isn't loaded
-  (pre-existing and cosmetic — that icon simply doesn't render).
+  `.cv-button::before` uses an inline data-URI SVG (a download icon shown on
+  hover) — no web font involved.
 - **projects / movies / blog** nav items are intentionally disabled; no routes.
 - `SECRET_KEY` has an insecure dev default; production supplies it via the
   environment / Secret Manager (the app warns otherwise).
 - The GitHub repo is `michaelhball/mhsb`; the local working directory is
   `mhsb2`. Same project.
-- **Targets Google Cloud Run** via the `Dockerfile` (gunicorn `mhsb:app`, bound
-  to `0.0.0.0:$PORT`); deploys are manual. The live site is still on
-  PythonAnywhere until the cutover — see [DEVELOPMENT.md](DEVELOPMENT.md) §8.
+- **Deployed on Google Cloud Run** (project `mhsb-prod`, region `europe-west1`,
+  service `mhsb`) via the `Dockerfile` (gunicorn `mhsb:app`, bound to
+  `0.0.0.0:$PORT`). Pushes to `main` auto-deploy through the `deploy` job in
+  `.github/workflows/ci.yml` (keyless Workload Identity Federation); manual
+  deploys / rollbacks use `./scripts/deploy.sh`. `mhsb.me` is mapped to the
+  service (DNS cut over from PythonAnywhere). See [DEVELOPMENT.md](DEVELOPMENT.md) §8.

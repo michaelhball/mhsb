@@ -98,8 +98,17 @@ CI (`.github/workflows/ci.yml`) runs the same checks on every push and PR.
 
 ## 8. Deploy to Google Cloud Run
 
-The app is containerised (`Dockerfile`) and served by gunicorn. Deploys are
-manual via `gcloud`; the live site only changes when you deploy and switch DNS.
+**Status:** live on Cloud Run — project `mhsb-prod`, region `europe-west1`,
+service `mhsb` (scale-to-zero), `SECRET_KEY` injected from the Secret Manager
+secret `flask-secret-key`. `mhsb.me` / `www.mhsb.me` are mapped to the service
+(GoDaddy DNS → Google, managed TLS). Pushes to `main` **auto-deploy** via GitHub
+Actions — see *Deploying changes* below. The app is containerised (`Dockerfile`)
+and served by gunicorn.
+
+The one-time setup below has already been done; the exact commands now live in
+[`scripts/deploy.sh`](scripts/deploy.sh) (manual deploy) and
+[`scripts/setup_cicd.sh`](scripts/setup_cicd.sh) (CI/CD identity). It's kept
+here as reference and for disaster recovery.
 
 ### One-time project setup
 
@@ -197,10 +206,27 @@ Do this **after** the `*.run.app` URL works, to avoid downtime.
 
 Once mhsb.me serves from Cloud Run, you can retire the PythonAnywhere app.
 
-### Updating the deployed site
+### Deploying changes
 
-Re-run `gcloud run deploy mhsb --source=. …`. This can later be automated with a
-GitHub Actions deploy job using
-[Workload Identity Federation](https://github.com/google-github-actions/auth);
-it's left manual for now since it needs GCP-side setup (a service account +
-identity pool) that can't be scripted from the repo alone.
+**Automatic (default):** every push to `main` runs CI (lint + tests + SCSS
+compile) and, if it passes, the `deploy` job in
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml) deploys to Cloud Run.
+Auth is keyless via **Workload Identity Federation** — no service-account keys.
+
+One-time CI/CD setup (already done — kept for reference / re-creation):
+
+```bash
+gcloud config configurations activate mhsb   # personal account + project
+./scripts/setup_cicd.sh                       # creates the WIF pool, OIDC
+                                              # provider, and gh-deploy SA
+```
+
+It prints two values to set as GitHub repo **Variables** (Settings → Secrets
+and variables → Actions → *Variables* tab): `WIF_PROVIDER` and `DEPLOY_SA`. The
+deploy service account is least-privilege (`roles/run.sourceDeveloper` +
+`serviceAccountUser` on the runtime SA); the GitHub trust is scoped to this one
+repo via a per-repo `principalSet` plus an org `attribute-condition`.
+
+**Manual deploy** (any time — from your machine, or to roll back a bad
+revision): re-run [`scripts/deploy.sh`](scripts/deploy.sh). It's an idempotent
+`gcloud run deploy --source=.`, i.e. an upsert that rolls out a new revision.
