@@ -45,6 +45,12 @@ uv run ruff check . && uv run ruff format  # lint + format
 - Tests are Flask test-client smoke tests in `tests/` (run via `uv run pytest`).
 - **Commits:** no AI/assistant self-attribution — omit `Co-Authored-By` and
   "Generated with …" trailers from commit messages and PRs.
+- **After every push, monitor CI in the background.** Launch a non-blocking
+  background watcher of the triggered run (e.g. `gh run watch <id>
+  --exit-status`) so it never blocks other open work. If the run fails, diagnose
+  from the logs and push a minimal fix commit right away, then re-watch — repeat
+  until green. A push isn't "done" until CI passes; failures get fixed
+  proactively, not left for the user.
 
 ## Gotchas
 
