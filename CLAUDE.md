@@ -43,6 +43,8 @@ uv run ruff check . && uv run ruff format  # lint + format
 - **ruff** lints and formats. Line length 120; rules `E,F,I,W,TID,UP,B`;
   **absolute imports only** (relative imports are banned); target `py313`.
 - Tests are Flask test-client smoke tests in `tests/` (run via `uv run pytest`).
+- **Commits:** no AI/assistant self-attribution — omit `Co-Authored-By` and
+  "Generated with …" trailers from commit messages and PRs.
 
 ## Gotchas
 
