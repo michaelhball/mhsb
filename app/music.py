@@ -6,12 +6,12 @@ MIXES = [
     {"url": _get_url(m["id"], m["color"]), **m}
     for m in [
         {
-            "id": "1894810614",
-            "color": "336a41",
-            "name": "breeze in the trees",
-            "date": "Aug. 11 2024",
-            "image_url": "/static/images/breeze_in_the_trees.jpeg",
-            "tags": ["electronic"],
+            "id": "1985768503",
+            "color": "6d7c9a",
+            "name": "slower your circulation",
+            "date": "Dec. 15 2024",
+            "image_url": "/static/images/slower_your_circulation.jpeg",
+            "tags": ["music"],
         },
         {
             "id": "1946302067",
@@ -22,12 +22,12 @@ MIXES = [
             "tags": ["spooky", "halloween", "house", "techno"],
         },
         {
-            "id": "1985768503",
-            "color": "6d7c9a",
-            "name": "slower your circulation",
-            "date": "Dec. 15 2024",
-            "image_url": "/static/images/slower_your_circulation.jpeg",
-            "tags": ["music"],
+            "id": "1894810614",
+            "color": "336a41",
+            "name": "breeze in the trees",
+            "date": "Aug. 11 2024",
+            "image_url": "/static/images/breeze_in_the_trees.jpeg",
+            "tags": ["electronic"],
         },
         {
             "id": "1653656613",
